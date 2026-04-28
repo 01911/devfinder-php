@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devfinder-api
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - JWT_SECRET=${JWT_SECRET:-devfinder-secret-key-2026}
+      - APP_KEY=base64:${APP_KEY:-dvdq6WnSrLp+qFM/Hh/+JiZFlqh/cj/SqBwL4fEaKOE=}
+    volumes:
+      - ./src:/app
+      - ./src/storage:/app/storage
+    networks:
+      - devfinder
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  devfinder:
+    driver: bridge
+
+# To run:
+# docker-compose up --build
+#
+# Access API at: http://localhost:8000
+#
+# Commands:
+# docker-compose exec api php artisan tinker
+# docker-compose exec api php artisan migrate
+# docker-compose logs -f api

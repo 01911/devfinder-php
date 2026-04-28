@@ -1,0 +1,176 @@
+### DevFinder API - Test Requests
+###
+### Use with REST Client extension (VS Code) or copy/paste to curl
+
+@baseUrl = http://localhost:8000/v1
+@token = 
+
+### =====================================================
+### APP INFO
+### =====================================================
+
+### @name get_app_info
+GET {{baseUrl}}/
+
+###
+
+### =====================================================
+### DEV ENDPOINTS
+### =====================================================
+
+### @name list_devs
+GET {{baseUrl}}/devs?page=1
+
+###
+
+### @name get_dev_by_username
+GET {{baseUrl}}/devs/marcelovilela
+
+###
+
+### @name create_dev
+POST {{baseUrl}}/devs
+Content-Type: application/json
+
+{
+  "username": "marcelovilela",
+  "name": "Marcelo Vilela",
+  "avatar": "https://avatars.githubusercontent.com/u/marcelovilela",
+  "bio": "Full-stack developer passionate about clean code"
+}
+
+###
+
+### @name get_me
+GET {{baseUrl}}/me
+Authorization: Bearer {{token}}
+
+###
+
+### @name get_dev_likes
+GET {{baseUrl}}/devs/marcelovilela/likes
+
+###
+
+### @name like_dev
+POST {{baseUrl}}/devs/otheruser/like
+Authorization: Bearer {{token}}
+
+###
+
+### @name unlike_dev
+DELETE {{baseUrl}}/devs/otheruser/like
+Authorization: Bearer {{token}}
+
+###
+
+### @name dislike_dev
+POST {{baseUrl}}/devs/otheruser/dislike
+Authorization: Bearer {{token}}
+
+###
+
+### @name undislike_dev
+DELETE {{baseUrl}}/devs/otheruser/dislike
+Authorization: Bearer {{token}}
+
+###
+
+### =====================================================
+### CHANNEL ENDPOINTS
+### =====================================================
+
+### @name list_channels
+GET {{baseUrl}}/channels?page=1
+
+###
+
+### @name get_channel_by_name
+GET {{baseUrl}}/channels/Rocketseat
+
+###
+
+### @name create_channel
+POST {{baseUrl}}/channels
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Rocketseat",
+  "link": "https://www.youtube.com/channel/UCSfwM5u0Kce6Cce8_S72olg",
+  "category": "Desenvolvimento Front-End",
+  "description": "O canal da Rocketseat lotado de conteudo para pessoas desenvolvedoras.",
+  "tags": ["javascript", "react", "react native"]
+}
+
+###
+
+### @name like_channel
+POST {{baseUrl}}/channels/1/like
+Authorization: Bearer {{token}}
+
+###
+
+### @name unlike_channel
+DELETE {{baseUrl}}/channels/1/like
+Authorization: Bearer {{token}}
+
+###
+
+### @name follow_channel
+POST {{baseUrl}}/channels/1/follow
+Authorization: Bearer {{token}}
+
+###
+
+### @name refresh_channels
+POST {{baseUrl}}/channels/refresh
+Authorization: Bearer {{token}}
+
+###
+
+### =====================================================
+### VIDEO ENDPOINTS
+### =====================================================
+
+### @name list_videos
+GET {{baseUrl}}/videos?page=1
+
+###
+
+### @name get_video_by_id
+GET {{baseUrl}}/video/1
+
+###
+
+### @name create_video
+POST {{baseUrl}}/video
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "React Patterns",
+  "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "channel": "Rocketseat",
+  "channel_url": "https://www.youtube.com/channel/UCSfwM5u0Kce6Cce8_S72olg",
+  "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+  "channel_id": "1",
+  "viewnum": 15000
+}
+
+###
+
+### @name get_trending_videos
+GET {{baseUrl}}/trending?page=1
+
+###
+
+### @name get_subscription_videos
+GET {{baseUrl}}/subscriptions?page=1
+Authorization: Bearer {{token}}
+
+###
+
+### @name refresh_video
+POST {{baseUrl}}/video/1/refresh
+Authorization: Bearer {{token}}
