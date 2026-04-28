@@ -22,7 +22,7 @@ failed to solve: process "/bin/sh -c docker-php-ext-install     pdo_mysql  �
 **Sintoma:** `failed to solve: process "/bin/sh -c docker-php-ext-install ... json" did not complete successfully`.
 
 ### Problemas Identificados:
-* **Extensão `json`:** Desde o PHP 8.0, a extensão JSON é parte integrante do PHP e não pode mais ser instalada via `docker-php-ext-install`. Tentar instalá-la causa falha no build.
+* **Extensão `json`:** Desde o PHP 8.0, a extensão JSON é ***parte integrante do PHP*** e não pode mais ser instalada via `docker-php-ext-install`. ***Tentar instalá-la causa falha no build***.
 * **Extensão `mbstring`:** Em imagens Alpine recentes, as dependências para mbstring mudaram. Se o binário base já a possui, a tentativa de recompilação sem flags específicas de biblioteca pode falhar.
 
 ### Dockerfile Otimizado para PHP 8.2:

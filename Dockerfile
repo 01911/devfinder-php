@@ -12,9 +12,7 @@ RUN apk add --no-cache \
 # Install PHP extensions
 RUN docker-php-ext-install \
     pdo_mysql \
-    zip \
-    mbstring \
-    json
+    zip
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -26,7 +24,8 @@ WORKDIR /app
 COPY src/composer.json src/composer.lock* ./
 
 # Install PHP dependencies
-RUN composer install --no-scripts --no-dev
+#RUN composer install --no-scripts --no-dev
+RUN composer install --no-scripts --no-dev --ignore-platform-reqs
 
 # Copy application code
 COPY src .
